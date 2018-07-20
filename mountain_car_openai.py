@@ -32,7 +32,9 @@ class DQN_agent:
 
 	def create_model(self): #Merely a function that creates a NN model
 		self.model = Sequential()
-		self.model.add(Dense(32, activation='relu', input_dim = self.env.observation_space.shape[0], kernel_initializer='normal'))
+		self.model.add(Dense(512, activation='relu', input_dim = self.env.observation_space.shape[0], kernel_initializer='normal'))
+		self.model.add(Dropout(.3))
+		self.model.add(Dense(512, activation='relu', kernel_initializer='normal'))
 		self.model.add(Dense(self.env.action_space.n))
 		self.model.compile(loss='mean_squared_error', optimizer=Adam(lr=self.learning_rate, decay=self.lr_decay))
 		return self.model
